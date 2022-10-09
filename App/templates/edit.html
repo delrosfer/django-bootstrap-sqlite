@@ -1,0 +1,27 @@
+{% extends 'add.html' %}
+
+{% block modal-id %} id="editModal{{ contact.pk }}" {% endblock modal-id %}
+
+{% block modal-title %} <i class="fas fa-edit"></i>&nbsp;&nbsp; Editar Contacto {% endblock modal-title %}
+
+{% block action %} action="/edit_contact" {% endblock action %}
+
+{% block btn-action %}<i class="fas fa-server"></i>&nbsp;&nbsp; Actualizar Contacto{% endblock btn-action %}
+
+{% block Value-id %}
+<div class="input-group mb-3">
+    <span class="btn border-secondary bg-light side-label txt-sm"><i class="fas fa-key"></i></span>
+      <input type="text" class="form-control txt-sm" name="id" value="{{ contact.id }}" readonly>
+</div>
+{% endblock Value-id %}
+
+
+{% block Value-name %} value="{{ contact.name }}" {% endblock Value-name %}
+{% block Value-email %} value="{{ contact.email }}" {% endblock Value-email %}
+{% block Value-occupation %} value="{{ contact.occupation }}" {% endblock Value-occupation %}
+{% block Value-salary %} value="{{ contact.salary }}" {% endblock Value-salary %}
+{% block option %}
+ <option style="background-color: #d3d3d3 counter-reset: #111">{{ contact.gender }}</option>
+{% endblock option %}
+
+{% block note %}{{ contact.note }}{% endblock note %}

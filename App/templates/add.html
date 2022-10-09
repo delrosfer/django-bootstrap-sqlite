@@ -1,0 +1,69 @@
+<!-- Modal -->
+<div class="modal fade" {% block modal-id %} id="addModal" {% endblock modal-id %} tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content bg-primary">
+      <div class="modal-header">
+        <h5 class="modal-title txt-sm3" id="addModalLabel">
+          {% block modal-title %} <i class="fas fa-plus"></i>&nbsp;&nbsp; Crear Contacto {% endblock modal-title %}
+        </h5>
+        <button type="button" class="btn-close txt-sm" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form method="POST" {% block action %} action="/add_contact" {% endblock action %} autocomplete="off">
+        {% csrf_token %}
+        <div class="modal-body">
+          {% block Value-id %} {% endblock Value-id %}
+          <div class="input-group mb-2">
+            <span class="btn border-secondary bg-light side-label txt-sm"><i class="fas fa-user-check"></i></span>
+              <input type="text" name="name" class="form-control txt-sm" maxlength="40" placeholder="Nombre Completo" required {% block Value-name %} {% endblock Value-name %}>
+          </div>
+          <div class="input-group mb-2">
+            <span class="btn border-secondary bg-light side-label txt-sm"><i class="fas fa-envelope"></i></span>
+              <input type="email" name="email" class="form-control txt-sm" maxlength="40" placeholder="Correo Electrónico" required {% block Value-email %} {% endblock Value-email %}>
+          </div>
+          <div class="input-group mb-2">
+            <span class="btn border-secondary bg-light side-label txt-sm"><i class="fas fa-user-tag"></i></span>
+              <input type="text" name="occupation" class="form-control txt-sm" maxlength="40" placeholder="Ocupación" required {% block Value-occupation %} {% endblock Value-occupation %}>
+          </div>
+          <div class="input-group mb-2">
+            <span class="btn border-secondary bg-light side-label txt-sm"><i class="fas fa-money-bill-alt"></i></span>
+              <input type="text" name="salary" class="form-control txt-sm" maxlength="40" placeholder="Ingresos" required {% block Value-salary %} {% endblock Value-salary %}>
+          </div>
+          <div class="input-group mb-3">
+            <label>
+              <span class="btn border-secondary bg-light side-label txt-sm" style="border-radius: 4px 0px 0px 4px;">
+                <i class="fas fa-child"></i>
+              </span>
+            </label>
+            <select class="form-select txt-sm" name="gender" required>
+              {% block option %}
+                <option value="" hidden>Seleccionar el Genero</option>
+              {% endblock option %}
+                <option disabled></option>
+                <option>M</option>
+                <option>F</option>
+              
+            </select>
+          </div>
+          <div class="form-group">
+            <textarea class="form-control txt-sm" name="note" rows="5" maxlength="1000" placeholder="La descipción es opcional...">{% block note %} {% endblock note %}</textarea>
+          </div>
+          <div class="mt-4" style="width: 100%;">
+            <button type="submit" class="btn btn-secondary mb-3 txt-sm">
+              {% block btn-action %}
+              <i class="fas fa-plus"></i>&nbsp;&nbsp; Crear Contacto
+              {% endblock btn-action %}
+            </button>
+            <button type="reset" class="btn btn-outline-dark mb-3 ms-1 txt-sm" style="width: 50px;" title="Reset">
+              <i class="fas fa-sync-alt"></i>
+            </button>
+            <a href="{% url 'home' %}" class="btn btn-outline-dark mb-3 ms-1 txt-sm" style="width: 50px;" title="Close">
+              <i class="fas fa-times"> </i>
+            </a>
+          </div>
+        </div>
+      </form>
+      
+      
+    </div>
+  </div>
+</div>

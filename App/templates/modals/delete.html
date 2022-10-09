@@ -1,0 +1,21 @@
+{% extends 'modals/baseModal.html' %}
+
+{% block modal-id %}id="deleteModal{{ contact.pk }}"{% endblock modal-id %}
+
+{% block modal-title %}
+<i class="fas fa-trash-alt txt-sm3"></i>&nbsp;&nbsp; <span class="txt-sm3">Eliminar Contacto</span>
+{% endblock modal-title %}
+
+{% block modal-body %}
+<div class="text-center text-danger txt-sm">
+	<i class="far fa-times-circle fa-5x mb-4 mt-2"></i>
+</div>
+<div class="text-center text-danger txt-sm">
+	<span>¿Realmente quiere eliminar este contacto?</span>
+	<div class="text-dark mt-3 mb-2">Contacto: <strong>{{ contact.name }}</strong></div>
+</div>
+{% endblock modal-body %}
+
+{% block modal-footer %}
+<a href="/delete_contact/{{ contact.id }}" class="btn btn-outline-danger btn-sm btn-modal txt-sm">Eliminar</a>
+{% endblock modal-footer %}

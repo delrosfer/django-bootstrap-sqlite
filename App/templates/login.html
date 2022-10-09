@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+#Titulo
+
+{% block title %} Login {% endblock title %}
+
+#bloque btn-nav denied here
+{% block nav-btn %}{% endblock nav-btn %}
+
+#bloque navbar content (fontawesome)
+{% block navbar-content %}
+<i style="color: yellowgreen;" class="fas fa-user-lock txt-sm3"></i>&nbsp;&nbsp; <span class="txt-sm3" >Ingresar</span>
+
+{% endblock navbar-content %}
+
+#contenido de la pagina
+{% block content %}
+<div class="container mt-3" id="card-login">
+	<div class="card p-3 login-border">
+		<span class="text-center mt-2 text-pulse txt-sm2">
+			<h3 style="color: darkblue;"><b>"Suscríbete al canal"</b></h3>
+		</span>
+		<form method="POST" action="/login_user" autocomplete="off">
+			{% csrf_token %}
+			<div class="input-group mb-2 mt-2">
+				<input type="text" name="username" class="form-control txt-sm2" placeholder="Ingrese su usuario">
+			</div>
+			<div class="input-group mb-2 mt-2">
+				<input type="password" name="password" class="form-control txt-sm2" placeholder="Ingrese su Contraseña" id="password">
+			</div>
+			<div class="form-check form-switch">
+				<input type="checkbox" name="" class="form-check-input txt-s2" onclick="myFunction()" style="float: right;">
+			</div>
+			<div class="d-grid gap-2 mt-2">
+				<input type="submit" name="" class="btn btn-info btn-sm mt-3 mb-1" value="Ingresar" id="btn-enter">
+			</div>
+		</form>
+		<center class="mt-2 mb-2 image-pulse">
+			<i class="fas fa-door-open mt-2 mb-2" id="login-smile"></i>
+		</center>
+	</div>
+</div>
+
+{% endblock content %}

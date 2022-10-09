@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block navbar-content %}
+	<i style="color: yellowgreen;" class="fas fa-user-alt txt-sm3"></i>&nbsp; &nbsp; <span class="txt-sm3">Lista de Contactos</span>
+{% endblock navbar-content %}
+
+{% block content %} 
+<div class="container">
+
+	<div class="input-group input-group-sm">
+		<a class="btn btn-primary btn-sm group-btn-sm" style="width: 40px;" href="" title="Agregar Contacto" data-bs-toggle="modal" data-bs-target="#addModal">
+			<i class="fas fa-plus"></i>
+		</a>
+		<input type="search" id="search-sm" placeholder="Buscar..." aria-label="Buscar" name="" class="form-control group-btn-sm">
+		<a href="{% url 'home' %}" title="Refrescar..." style="width: 40px;" class="btn btn-secondary btn-sm group-btn-sm">	<i class="fas fa-sync-alt"></i>
+		</a>
+	</div>
+	<br>
+	<table class="table table-bordered table-striped table-hover border-info table-sm" id="example" style="text-align: center; font-size: 14px;">
+		<thead class="table-warning border-success">
+			<tr>
+				<th style="width: 7%;">Id</th>
+				<th style="width: 20%;">Nombre</th>
+				<th style="width: 15%;">Correo Electrónico</th>
+				<th style="width: 15%;">Ocupación</th>
+				<th style="width: 10%;">Ingresos</th>
+				<th style="width: 8%;">Genero</th>
+				<th style="width: 15%;">Fecha Registro</th>
+				<th class="action-color" style="width: 5%;">Editar</th>
+				<th class="action-color" style="width: 5%;">Eliminar</th>
+			</tr>
+		</thead>
+
+		{% for contact in contacts %}
+			<tr>
+				<td id="id">{{ contact.id }}</td>
+				<td id="top-table" label="Nombre">{{ contact.name }}</td>
+				<td id="responsive-border" label="Correo E">{{ contact.email }}</td>
+				<td id="responsive-border" label="Ocupacion">{{ contact.occupation }}</td>
+				<td id="responsive-border" label="Salario">{{ contact.salary }}</td>
+				<td id="responsive-border" label="Genero">{{ contact.gender }}</td>
+				<td id="responsive-border" label="Creado">{{ contact.created_at | date:'d/m/Y (H:i)' }}</td>
+				<td>
+					<a class="btn btn-info text-center txt-sm" title="Editar Contacto" data-bs-toggle="modal" data-bs-target="#editModal{{ contact.pk }}" href="">
+						<i class="fas fa-pencil-alt"></i>
+					</a>
+				</td>
+				<td>
+					<a class="btn btn-danger text-center txt-sm up-btn" title="Eliminar Contacto" data-bs-toggle="modal" data-bs-target="#deleteModal{{ contact.pk }}" href="">
+						<i class="fas fa-trash"></i>
+					</a>
+				</td>
+			</tr>
+			{% include 'edit.html' %}
+			{% include 'modals/delete.html' %}
+				
+		{% endfor %}
+		
+	</table>
+
+</div>
+
+<br><br><br>
+{% endblock content %}

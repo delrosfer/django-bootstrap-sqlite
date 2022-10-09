@@ -1,0 +1,320 @@
+/* Inicio de configuracion */
+
+html,
+body {
+	height: 100%;
+	margin: 0;
+	max-width: 100%;
+}
+
+.wrapper {
+	min-height: 100%;
+	margin-bottom: -50px;
+}
+
+#footer,
+.push{
+	height: 50px;
+}
+
+#card-login {
+	width: 350px;
+}
+
+.login-border {
+	border-top: .4rem solid darkblue;
+	border-bottom: .4rem solid darkblue;
+	border-radius: 10px;
+}
+
+#btn-enter {
+	border-radius: 10px;
+	font-size: 16px;
+	font-weight: bolder;
+}
+
+#login-smile {
+	color: orangered;
+	font-size: 120px;
+}
+
+.page-item.active .page-link {
+	columns: #fff;
+	background-color: #6c757d;
+	border: 1px solid $6c757d;
+}
+.pagination > li > a {
+	background-color: powderblue;
+	color: #6c757d;
+}
+.pagination > li > a:focus,
+.pagination > li > a:hover,
+.pagination > li > a:focus,
+.pagination > li > a:hover {
+	color: #111;
+	background-color: #d3d3d3;
+	border: 1px solid #6c757d;
+	box-shadow: none;
+}
+
+.dataTables_paginate{
+	margin-top: -30px !important;
+}
+
+.dataTables_filter {
+	display: none;
+}
+
+.dataTables_length {
+	float: right !important;
+	margin-top: 10px !important;
+}
+
+.buttons-print, .buttons-excel, .buttons-copy, .buttons-pdf {
+	background-color: orangered;
+	color: #111;
+	width: 60px;
+	}
+
+.dt-buttons {
+	margin-bottom: 10 px !important;
+}
+/*
+.sorting_disabled {
+	color: transparent !important;
+}
+*/
+
+thead input {
+	width: 100%;
+	text-align: center;
+}
+
+.action-color {
+	color: transparent;
+}
+
+th:nth-child(8), th:nth-child(9) {
+	border: none;
+}
+
+.side-label {
+	width: 45px;
+}
+
+.btn-modal {
+	width: 60px;
+}
+
+.group-btn-sm {
+	display: none;
+}
+
+.swal-modal {
+	background-color: rgba: 0, 0, 0, 0.651;
+	color: steelblue;
+}
+
+
+.swal-title {
+	color: purple;
+	font-size: 20px;
+}
+
+.swal-text {
+	color: orangered;
+	font-size: 15px;
+}
+
+.swal-button {
+	padding: 7px 19px;
+	border-radius: 5px;
+	background-color: #198754;
+	font-size: 12px;
+	border: 1px solid #198754;
+}
+
+.swal-button:focus {
+	box-shadow: none;
+}
+
+.swal-button:not([disabled]):hover {
+	background: transparent;
+	color: lightyellow;
+	border: 1px solid #198754;
+}
+
+.swal-icons--success__hide-corners {
+	background: none !important;
+}
+.swal-icon--success:before,
+.swal-icon--success:after {
+	background: none !important;
+}
+
+.form-control: focus {
+	border-color: blue;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+
+.form-check-input:checked {
+	background-color: #8abaae;
+	border: red !important;
+	box-shadow: 0 0 8px rgba(1, 152, 117, 0.4) !important;
+}
+
+.form-check-input {
+	border: purple !important;
+	box-shadow: 0 0 8px rgba(1, 152, 117, 0.4) !important;
+}
+
+/* -----
+ * #Modo responsive para datatables (1199 px)
+---- */
+@media (max-width: 1199px) {
+/*Tabla responsive*/
+
+	.table thead {
+		display: none;
+	}
+
+	.table, .table tbody, .table tr, .table td {
+		display: block;
+	}
+
+	.table tr {
+		margin-bottom: 15px;
+		border: 1px solid #111;
+		border-radius: 3px;
+	}
+
+	.table td {
+		text-align: right;
+		padding-left: 35%;
+		position: relative;
+		border: 1px solid transparent;
+	}
+
+	.table td::before {
+		content: attr(label);
+		position: absolute;
+		left: 0;
+		width: 50%;
+		padding-left: 15px;
+		font-size: 13px;
+		font-weight: bold;
+		text-align: left;
+	}
+
+	.table > thead > tr:first-child {
+		display: none;
+		margin-top: 5px;
+	}
+
+	/*responsive border*/
+	#responsive-border {
+		border: 1px solid #a9a9a9;
+	}
+
+	/*primer celda cambiamos el color */
+	#top-table {
+		background-color: #111;
+		color: #fff;
+	}
+
+	#id {
+		display: none;
+	}
+}
+
+/* -----
+ * #Modo responsive para smartphone (575 px)
+---- */
+@media (max-width: 575px) {
+	/*Login*/
+	#card-login {
+		width: 95%;
+	}
+
+	#btn-enter {
+		font-size: 14px;
+	}
+
+	#login-smile {
+	font-size: 90px;
+	}
+
+	/*txt-sm levels*/
+	.txt-sm {
+		font-size: 12px;
+	}
+
+	.txt-sm2 {
+		font-size: 14px;
+	}
+
+	.txt-sm3 {
+		font-size: 16px;
+	}
+
+	/*Footer*/
+	#footer {
+		font-size: 13px;
+	}
+
+	/*agrupar botones en navbar*/
+	.group-btn-sm {
+		display: inline;
+		margin-top: 25px;
+
+	}
+
+	#nav-content {
+		margin-left: 15px;
+	}
+
+	.group-btn {
+		display: none;
+	}
+
+	.logout-sm {
+		display: inline;
+		margin-right: -10px;
+	}
+
+	#nav-content {
+		margin-left: 15px;
+	}
+
+	.up-btn {
+		margin-top: -10px;
+		}
+
+	/*Datatables*/
+	/*show entries (datapage)*/
+	.dataTables_length {
+		float: left !important;
+		margin-top: -5px !important;
+		margin-bottom: 15px !important;
+		font-size: 12px;
+	}
+
+	/*Pagination*/
+	.dataTables_paginate {
+		margin-top: 0px !important;
+		float: left !important;
+		font-size: 12px;
+	}
+
+	/*Footer (datatables)*/
+	.dataTables_info: {
+		display: none;
+	}
+
+	.dataTables_empty {
+		text-align: center !important;
+		margin-left: -30% !important;
+		}
+
+}

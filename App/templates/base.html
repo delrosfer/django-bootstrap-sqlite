@@ -1,0 +1,272 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="shortcut icon" href={% static "img/favicon.ico" %}>
+
+	<link rel="shortcut icon" href={% static "img/logo.ico" %}>
+	
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+	<link rel="stylesheet" type="text/css" href={% static "css/style.css" %}>
+
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/jq-3.6.0/jszip-2.5.0/dt-1.12.1/b-2.2.3/b-html5-2.2.3/b-print-2.2.3/datatables.min.css"/>
+	<title>Crud Django Bootstrap</title>
+</head>
+	<body>
+		<div class="wrapper">
+			<header>
+				<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+					<div class="col-sm">
+						<a href="" class="navbar-brand flex-grow-1" id="nav-content">
+							{% block navbar-content %}{% endblock navbar-content %}
+						</a>
+					</div>
+					{% block nav-btn %}
+					<div class="d-flex" style="margin-right: 25px;">
+						<div class="input-group input-group-sm">
+
+							<a class="btn btn-success btn-sm group-btn" style="width: 40px;" href="" title="Agregar Contacto" data-bs-toggle="modal" data-bs-target="#addModal">
+								<i class="fas fa-plus"></i>
+							</a>
+							<input type="search" id="search" placeholder="Buscar..." aria-label="Buscar" name="" class="form-control group-btn">
+							<a href="{% url 'home' %}" title="Refrescar..." style="width: 40px;" class="btn btn-secondary btn-sm group-btn">	<i class="fas fa-sync-alt"></i>
+							</a>
+
+							<a class="btn btn-danger btn-sm group-btn" style="margin-left: 25px;border-radius: 50%;" title="Salir" data-bs-toggle="modal" data-bs-target="#logoutModal">
+								<i class="fas fa-power-off"></i>
+							</a>
+
+							<a class="logout-sm" style="margin-left: 25px; border-radius: 50%;" title="Salir" data-bs-toggle="modal" data-bs-target="#logoutModal">
+								<i class="fas fa-power-off text-light align-middle"></i>
+							</a>
+						</div>
+					</div>
+					{% endblock nav-btn %}
+				</nav>
+			</header>
+
+			{% block content %} {% endblock content %}
+
+			{% include 'add.html' %}
+			{% include 'modals/logout.html' %}
+
+		</div>
+
+		<footer class="bg-dark text-center text-lg-start" id="footer" style="color: #fff;">
+			<div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">&copy; {% now "Y" %} Derechos Reservados:
+				<a href="#" class="text-light" style="text-decoration: none;">
+					<span style="color: greenyellow;">www.plussilver.com</span>
+				</a>
+			</div>
+		</footer>
+
+		{% for message in messages %}
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+			{% if message.tags == 'error' %}
+				
+				<script>
+					var m = "{{ message }}";
+					swal("Acceso Denegado !!", "Valida tus datos", "error")
+				</script>
+			{% elif message.tags == 'success' %}
+				<script>
+					var m = "{{ message }}";
+					swal("Excelente !!", m, "success")
+				</script>
+			{% endif %}
+		{% endfor %}
+
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+		<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+		<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/jszip-2.5.0/dt-1.12.1/b-2.2.3/b-html5-2.2.3/b-print-2.2.3/datatables.min.js"></script>
+
+		<script>
+			$(document).ready(function() {
+				$('#example thead tr')
+					.clone(true)
+					.addClass('filters')
+					.appendTo('#example thead');
+
+				var table = $('#example').DataTable({
+					//"ajax": "/json",
+					//"columns": [
+					//	{"data": "id"},
+					//	{"data": "name"},
+					//	{"data": "email"},
+					//	{"data": "occupation"},
+					//	{"data": "salary"},
+					//	{"data": "gender"},
+					//],
+
+					paging: true,
+					pageLength: 10,
+					lengthChange: true,
+					autoWidth: false,
+					searching: true,
+					bInfo: true,
+					bSort: true,
+
+					order: [],
+					orderCellsTop: true,
+					scrollX: false,
+					fixedHeader: true,
+
+					"columnDefs": [{
+						"targets": [7, 8],
+						"orderable": false
+					}],
+					
+					initComplete: function() {
+						var api = this.api();
+
+						api
+							.columns([0, 1, 2, 3, 4, 5, 6])
+							.eq(0)
+							.each(function(colIdx) {
+								var cell = $('.filters th').eq(
+									$(api.column(colIdx).header()).index()
+									);
+								var title = $(cell).text();
+								$(cell).html('<input type="text" placeholder="' + title + '"/>');
+
+								$(
+									'input',
+									$('.filters th').eq($(api.column(colIdx).header()).index())
+									)
+								.off('keyip change ')
+								.on('keyup change', function(e) {
+									e.stopPropagation();
+
+									$(this).attr('title', $(this).val());
+									var regexr = '({search})';
+
+									var cursorPosition = this.selectionStart;
+
+									api
+										.column(colIdx)
+										.search(
+											this.value != ''
+											? regexr.replace('{search}', '(((' + this.value + ')))')
+											: '',
+										this.value != '',
+										this.value == ''
+											)
+									.draw();
+
+								$(this)
+									.focus() [0]
+									.setSelectionRange(cursorPosition, cursorPosition);
+								});
+							});
+					},
+					//buttons
+					dom: 'lBfrtip',
+					buttons: [
+						{
+							extend: 'copy',
+							text: '<i class="fas fa-clone"></i>',
+							className: 'btn btn-outline-secondary',
+							titleAttr: 'Copiar', 
+
+							exportOptions: {
+								columns: [0, 1, 2, 3, 4, 5]
+							},
+						},
+						{
+							extend: 'excel',
+							text: '<i class="fas fa-file-excel"></i>',
+							className: 'btn btn-outline-secondary',
+							titleAttr: 'Excel',
+
+							exportOptions: {
+								columns: [0, 1, 2, 3, 4, 5]
+							},
+						},
+
+						{
+							extend: 'print',
+							text: '<i class="fas fa-print"></i>',
+							className: 'btn btn-outline-secondary',
+							titleAttr: 'Imprimir',
+
+							exportOptions: {
+								columns: [0, 1, 2, 3, 4, 5]
+							},
+							//personalizamos la letra
+							customize: function ( win ) {
+								$(win.document.body).css('font-size', '10pt')
+								$(win.document.body).find('table')
+									.addClass('compact')
+									.css('font-size', 'inherit');
+							},
+						},
+						{
+							extend: 'pdf',
+							text: '<i class="fas fa-file-pdf"></i>',
+							className: 'btn btn-outline-secondary',
+							titleAttr: 'PDF',
+
+							exportOptions: {
+								columns: [0, 1, 2, 3, 4, 5]
+							},
+							//Centramos las columnas
+							tableHeader: {
+								alignment: 'center'
+							},
+							//tamaño de la letra
+							customize: function (doc) {
+								doc.styles.tableHeader.alignment = 'center';
+								doc.styles.tableBodyOdd.alignment = 'center';
+								doc.styles.tableBodyEven.alignment = 'center';
+								doc.styles.tableHeader.fontSize = 7;
+								doc.defaultStyle.fontSize = 6;
+
+								//obtener el 100% del ancho de la tabla
+								doc.content[1].table.widths = Array(doc.content[1].table.body[1].length + 1).join('*').split('');
+							}
+						},
+					]				
+				});
+				var newSearch = $("#example").DataTable();
+				$('#search, #search-sm').keyup(function() {
+				newSearch.search($(this).val()).draw();
+				})			
+			});
+		</script>
+		#funcion para 
+		<script>
+			(function pulse() {
+				$('.text-pulse').fadeOut(1000).fadeIn(1000, pulse);
+			})();
+		</script>
+
+		<script>
+			(function pulseimage() {
+				$('.image-pulse').fadeOut(2000).fadeIn(2000, pulseimage);
+			})();
+		</script>
+
+		#scrip para mostrar u ocultar la contraseña	
+		<script>
+			function myFunction() {
+				var p = document.getElementById("password");
+				if (p.type == "password") {
+					p.type = "text"
+				}
+				else {
+					p.type = "password"
+				}
+			}
+		</script>
+	</body>
+</html>
